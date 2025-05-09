@@ -12,21 +12,25 @@ import reproductionRoutes from "./routes/reproductionRoutes.js";
 import lactationRoutes from "./routes/lactationRoutes.js";
 import productionRoutes from "./routes/productionRoutes.js";
 
+const app = express();
 dotenv.config();
 
-const app = express();
-
+// Configurações do Express
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
 
-app.use("/api", userRoutes);
-app.use("/api", propertyRoutes);
-app.use("/api", lotRoutes);
-app.use("/api", buffaloRoutes);
-app.use("/api", feedingRoutes);
-app.use("/api", reproductionRoutes);
-app.use("/api", lactationRoutes);
-app.use("/api", productionRoutes);
+// Rotas
+app.use("/", userRoutes);    // Rota Usuário
+app.use("/", propertyRoutes);// Rota Propriedade
+app.use("/", lotRoutes);     // Rota Lote
+app.use("/", buffaloRoutes); // Rota Bufalo
+app.use("/", feedingRoutes); // Rota Alimentação
+app.use("/", reproductionRoutes); // Rota Reprodução
+app.use("/", lactationRoutes); // Rota Lactação
+app.use("/", productionRoutes); // Rota Produção
 
-export default app;
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`🚀 Servidor rodando em http://localhost:${port}`);
+});
